@@ -107,13 +107,17 @@ function App() {
 
     for (let i=0; i<sites.length; i++) {
       const url = sites[i];
-      const domain = (new URL(url));
-      const hostname = domain.hostname;
-      const company = hostname.replace("www.", "").replace(".com", "");
-      const pathname = domain.pathname;
-      const tag = company + "-" + pathname;
+      try {
+        const domain = (new URL(url));
+        const hostname = domain.hostname;
+        const company = hostname.replace("www.", "").replace(".com", "");
+        const pathname = domain.pathname;
+        const tag = company + "-" + pathname;
 
-      dict[tag] = url;
+        dict[tag] = url;
+      } catch {
+        console.log("Not a valid url");
+      }
     }
 
     const requestOptions = {
